@@ -4,7 +4,7 @@ var args = require("yargs").argv;
 var fs = require("fs");
 var gutil = require('gutil');
 var filter = require("gulp-filter");
-var xeditor = require("gulp-xml-editor");
+var xeditor = require("gulp-xml-transformer");
 /*
  * main functions -----------------------
  */

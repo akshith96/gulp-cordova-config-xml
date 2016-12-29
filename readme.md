@@ -3,13 +3,13 @@ Run this before you run cordova build
 ## Install
 
 ```sh
-$ npm install --save-dev gulp-cordova-config
+$ npm install --save-dev gulp-cordova-config-xml
 ```
 
 ## Add the following to your gulpfile
 
 ```js
-gulp.task('config', require('gulp-cordova-config'));
+gulp.task('config', require('gulp-cordova-config-xml'));
 ```
 ## Usage
 ```sh
