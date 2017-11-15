@@ -9,21 +9,23 @@ var xeditor = require("gulp-xml-transformer");
  * main functions -----------------------
  */
 
-function cordovaConfig() {}
+function cordovaConfig() { }
 
-cordovaConfig.prototype.run = function() {
+cordovaConfig.prototype.run = function () {
 
   if (args.appId) {
     return this.id(args.appId);
   } else if (args.appName) {
     return this.name(args.appName)
+  } else if (args.version) {
+    return this.version(args.version)
   } else {
     return this.help();
   }
 };
 
 
-cordovaConfig.prototype.name = function(newName) {
+cordovaConfig.prototype.name = function (newName) {
   this.pluginMessage();
   console.log(newName);
   return vfs.src(['./config.xml'])
@@ -35,8 +37,23 @@ cordovaConfig.prototype.name = function(newName) {
     .pipe(vfs.dest("./"));
 }
 
+cordovaConfig.prototype.version = function (newVersion) {
+  this.pluginMessage();
+  console.log(newVersion);
+  this.pluginMessage();
+  return vfs.src(['./config.xml'])
+    .pipe(vfs.dest('./'))
+    .pipe(xeditor([{
+      path: '.',
+      attr: {
+        'version': newVersion
+      }
+    }]))
+    .pipe(vfs.dest("./"));
+}
 
-cordovaConfig.prototype.id = function(newId) {
+
+cordovaConfig.prototype.id = function (newId) {
   this.pluginMessage();
   return vfs.src(['./config.xml'])
     .pipe(vfs.dest('./'))
@@ -54,12 +71,12 @@ cordovaConfig.prototype.id = function(newId) {
  * helper functions -----------------------
  */
 
-cordovaConfig.prototype.pluginMessage = function() {
+cordovaConfig.prototype.pluginMessage = function () {
   gutil.log("\nRemember to run cordova build after this\n");
 }
 
-cordovaConfig.prototype.help = function() {
-  gutil.log('\n\tUSAGE:\n\t\t$ gulp config --appId="com.new.id"\n\t\t$ gulp config --appName="newName"\n');
+cordovaConfig.prototype.help = function () {
+  gutil.log('\n\tUSAGE:\n\t\t$ gulp config --appId="com.new.id"\n\t\t$ gulp config --appName="newName"\n\t\t$ gulp config --version="newVersion"\n');
 }
 
 /*
@@ -67,6 +84,6 @@ cordovaConfig.prototype.help = function() {
  */
 
 var init = new cordovaConfig();
-module.exports = function() {
+module.exports = function () {
   return init.run();
 };

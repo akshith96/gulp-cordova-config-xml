@@ -15,6 +15,7 @@ gulp.task('config', require('gulp-cordova-config-xml'));
 ```sh
 $ gulp config --appId="com.new.id"
 $ gulp config --appName="newApp"
+$ gulp config --version="1.0.0"
 ```
 
 
