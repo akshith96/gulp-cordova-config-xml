@@ -19,11 +19,12 @@ cordovaConfig.prototype.run = function () {
     return this.name(args.appName)
   } else if (args.version) {
     return this.version(args.version)
+  } else if (args.build) {
+    return this.build(args.build)
   } else {
     return this.help();
   }
 };
-
 
 cordovaConfig.prototype.name = function (newName) {
   this.pluginMessage();
@@ -33,6 +34,18 @@ cordovaConfig.prototype.name = function (newName) {
     .pipe(xeditor([{
       path: '//xmlns:name',
       text: newName
+    }], 'http://www.w3.org/ns/widgets'))
+    .pipe(vfs.dest("./"));
+}
+
+cordovaConfig.prototype.desc = function (newDesc) {
+  this.pluginMessage();
+  console.log(newDesc);
+  return vfs.src(['./config.xml'])
+    .pipe(vfs.dest('./'))
+    .pipe(xeditor([{
+      path: '//xmlns:description',
+      text: newDesc
     }], 'http://www.w3.org/ns/widgets'))
     .pipe(vfs.dest("./"));
 }
@@ -52,6 +65,20 @@ cordovaConfig.prototype.version = function (newVersion) {
     .pipe(vfs.dest("./"));
 }
 
+cordovaConfig.prototype.build = function (newBuild) {
+  this.pluginMessage();
+  console.log(newBuild);
+  this.pluginMessage();
+  return vfs.src(['./config.xml'])
+    .pipe(vfs.dest('./'))
+    .pipe(xeditor([{
+      path: '.',
+      attr: {
+        'ios-CFBundleVersion': newBuild
+      }
+    }]))
+    .pipe(vfs.dest("./"));
+}
 
 cordovaConfig.prototype.id = function (newId) {
   this.pluginMessage();
