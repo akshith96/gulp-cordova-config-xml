@@ -1,10 +1,10 @@
 {
-    "name": "gulp-cordova-config-xml",
-    "version": "0.0.2",
+    "name": "gulp-ionic-config-xml",
+    "version": "0.0.1",
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/krish-dev/gulp-cordova-config-xml"
+        "url": "https://github.com/akshith96/gulp-ionic-config-xml"
     },
     "keywords": [
         "gulpplugin",
